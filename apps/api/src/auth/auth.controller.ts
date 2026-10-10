@@ -6,23 +6,32 @@ import {
   Req,
   Request,
   Res,
+  // eslint-disable-next-line @typescript-eslint/no-unused-vars
   SetMetadata,
   UseGuards,
 } from '@nestjs/common';
 import { AuthService } from './auth.service';
 import { CreateUserDto } from '../user/dto/create-user.dto';
 import { LocalAuthGuard } from './guards/local-auth/local-auth.guard';
+// eslint-disable-next-line @typescript-eslint/no-unused-vars
 import { JwtAuthGuard } from './guards/jwt-auth/jwt-auth.guard';
 import { RefreshAuthGuard } from './guards/refresh-auth/refresh-auth.guard';
 import { GoogleAuthGuard } from './guards/google-auth/google-auth.guard';
 import { Response } from 'express';
 import { Public } from './decorators/public.decorator';
 import { Roles } from './decorators/roles.decorator';
+// eslint-disable-next-line @typescript-eslint/no-unused-vars
 import { RolesGuard } from './guards/roles/roles.guard';
 
 @Controller('auth')
 export class AuthController {
   constructor(private readonly authService: AuthService) {}
+  @Post('register')
+  newRegisterUser(@Body() creatUserDto: CreateUserDto) {
+    console.log('=== REACHED register ===');
+    return this.authService.newRegisterUser(creatUserDto);
+  }
+
   @Post('signup')
   registerUser(@Body() createUserDto: CreateUserDto) {
     console.log('=== REACHED SIGNUP ===');

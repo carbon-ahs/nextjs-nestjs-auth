@@ -38,7 +38,7 @@ import { RolesGuard } from './guards/roles/roles.guard';
     },
     {
       provide: APP_GUARD,
-      useClass: RolesGuard, 
+      useClass: RolesGuard,
     },
   ],
 })

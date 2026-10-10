@@ -27,6 +27,12 @@ export class AuthService {
     return this.userService.create(createUserDto);
   }
 
+  async newRegisterUser(createUserDto: CreateUserDto) {
+    const user = await this.userService.findByEmail(createUserDto.email);
+    if (user) throw new ConflictException('User already exists!');
+    return this.userService.newCreateUser(createUserDto);
+  }
+
   async validateLocalUser(email: string, password: string) {
     const user = await this.userService.findByEmail(email);
     if (!user) throw new UnauthorizedException('User not found!');
