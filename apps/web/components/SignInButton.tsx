@@ -10,6 +10,7 @@ const SignInButton = async () => {
         <>
           <Link href={"/auth/signin"}>Sign In</Link>
           <Link href={"/auth/signup"}>Sign Up</Link>
+          <Link href={"/auth/register"}>Register</Link>
         </>
       ) : (
         <>

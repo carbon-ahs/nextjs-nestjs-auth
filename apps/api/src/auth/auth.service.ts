@@ -43,6 +43,15 @@ export class AuthService {
     return { id: user.id, name: user.name, role: user.role };
   }
 
+  async newValidateUser(email: string, password: string) {
+    const user = await this.userService.findByEmail(email);
+    if (!user) throw new UnauthorizedException('User not found!');
+    const isPasswordMatched = verify(user.password, password);
+    if (!isPasswordMatched)
+      throw new UnauthorizedException('Invalid Credentials!');
+    return { id: user.id, name: user.name, role: user.role };
+  }
+
   async login(userId: number, name: string, role: Role) {
     const { accessToken, refreshToken } = await this.generateTokens(userId);
     const hashedRT = await hash(refreshToken);
